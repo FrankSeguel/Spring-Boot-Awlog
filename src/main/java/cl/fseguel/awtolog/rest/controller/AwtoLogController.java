@@ -25,7 +25,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @author fseguel
  */
 @RestController
-@RequestMapping(value = "/awlog")
+@RequestMapping(value = "/awtolog")
 public class AwtoLogController {
     
     private static final Logger logger = LoggerFactory.getLogger(AwtoLogController.class);

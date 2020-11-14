@@ -14,14 +14,14 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
  */
 @EnableAutoConfiguration
 @Configuration
-@ComponentScan("cl.fseguel.awlog")
+@ComponentScan("cl.fseguel.awtolog")
 @SpringBootApplication
 @EnableJpaRepositories(basePackages = {"cl.fseguel.awtolog.model.repository"})
 @EntityScan(basePackages = {"cl.fseguel.awtolog.model.entity"})
-public class AwlogApplication {
+public class AwtoLogApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(AwlogApplication.class, args);
+        SpringApplication.run(AwtoLogApplication.class, args);
     }
 
 }
