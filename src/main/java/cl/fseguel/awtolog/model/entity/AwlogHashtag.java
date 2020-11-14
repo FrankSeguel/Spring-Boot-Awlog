@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package cl.fseguel.awlog.model.entity;
+package cl.fseguel.awtolog.model.entity;
 
-import cl.fseguel.awlog.utils.reflection.BaseBean;
+import cl.fseguel.awtolog.utils.reflection.BaseBean;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.List;

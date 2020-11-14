@@ -1,4 +1,4 @@
-package cl.fseguel.awlog;
+package cl.fseguel.awtolog;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -16,8 +16,8 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @Configuration
 @ComponentScan("cl.fseguel.awlog")
 @SpringBootApplication
-@EnableJpaRepositories(basePackages = {"cl.fseguel.awlog.model.repository"})
-@EntityScan(basePackages = {"cl.fseguel.awlog.model.entity"})
+@EnableJpaRepositories(basePackages = {"cl.fseguel.awtolog.model.repository"})
+@EntityScan(basePackages = {"cl.fseguel.awtolog.model.entity"})
 public class AwlogApplication {
 
     public static void main(String[] args) {

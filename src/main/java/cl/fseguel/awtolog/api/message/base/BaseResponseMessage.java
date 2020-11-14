@@ -3,14 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package cl.fseguel.awlog.model.message.base;
+package cl.fseguel.awtolog.api.message.base;
 
-import cl.fseguel.awlog.utils.reflection.BaseBean;
+import cl.fseguel.awtolog.utils.reflection.BaseBean;
 
 /**
  *
  * @author fseguel
  */
-public class BaseRequestMessage extends BaseBean{
+public class BaseResponseMessage extends BaseBean{
     
 }

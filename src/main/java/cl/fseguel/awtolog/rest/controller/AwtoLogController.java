@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package cl.fseguel.awlog.rest.controller;
+package cl.fseguel.awtolog.rest.controller;
 
-import cl.fseguel.awlog.model.message.LogRequestMessage;
-import cl.fseguel.awlog.model.message.LogResponseMessage;
+import cl.fseguel.awtolog.api.message.LogRequestMessage;
+import cl.fseguel.awtolog.api.message.LogResponseMessage;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
@@ -26,9 +26,9 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping(value = "/awlog")
-public class AwLogController {
+public class AwtoLogController {
     
-    private static final Logger logger = LoggerFactory.getLogger(AwLogController.class);
+    private static final Logger logger = LoggerFactory.getLogger(AwtoLogController.class);
     
     /**
      * 
