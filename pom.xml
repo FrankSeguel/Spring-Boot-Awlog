@@ -9,10 +9,10 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>cl.fseguel.awlog</groupId>
-    <artifactId>awlog</artifactId>
+    <artifactId>awto-log</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>jar</packaging>
-    <name>awlog</name>
+    <name>awto-log</name>
     <description>Awlog for Spring Boot</description>
 
     <properties>

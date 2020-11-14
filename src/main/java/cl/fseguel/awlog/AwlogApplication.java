@@ -16,8 +16,8 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @Configuration
 @ComponentScan("cl.fseguel.awlog")
 @SpringBootApplication
-@EnableJpaRepositories(basePackages = {"cl.fseguel.awlog.repository"})
-@EntityScan(basePackages = {"cl.fseguel.awlog.models"})
+@EnableJpaRepositories(basePackages = {"cl.fseguel.awlog.model.repository"})
+@EntityScan(basePackages = {"cl.fseguel.awlog.model.entity"})
 public class AwlogApplication {
 
     public static void main(String[] args) {

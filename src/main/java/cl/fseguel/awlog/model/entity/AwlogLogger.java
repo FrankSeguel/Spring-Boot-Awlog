@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package cl.fseguel.awlog.models;
+package cl.fseguel.awlog.model.entity;
 
+import cl.fseguel.awlog.utils.reflection.BaseBean;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
@@ -42,7 +43,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "AwlogLogger.findByOrigin", query = "SELECT a FROM AwlogLogger a WHERE a.origin = :origin"),
     @NamedQuery(name = "AwlogLogger.findByDetails", query = "SELECT a FROM AwlogLogger a WHERE a.details = :details"),
     @NamedQuery(name = "AwlogLogger.findByStacktrace", query = "SELECT a FROM AwlogLogger a WHERE a.stacktrace = :stacktrace")})
-public class AwlogLogger implements Serializable {
+public class AwlogLogger extends BaseBean implements Serializable {
 
     private static final long serialVersionUID = 1L;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
@@ -150,31 +151,6 @@ public class AwlogLogger implements Serializable {
 
     public void setAwlogLoggerHashtagList(List<AwlogLoggerHashtag> awlogLoggerHashtagList) {
         this.awlogLoggerHashtagList = awlogLoggerHashtagList;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof AwlogLogger)) {
-            return false;
-        }
-        AwlogLogger other = (AwlogLogger) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "cl.fseguel.awlog.model.AwlogLogger[ id=" + id + " ]";
     }
 
 }

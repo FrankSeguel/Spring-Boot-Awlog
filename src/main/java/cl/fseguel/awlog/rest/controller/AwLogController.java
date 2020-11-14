@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package cl.fseguel.awlog.controller;
+package cl.fseguel.awlog.rest.controller;
 
-import cl.fseguel.awlog.message.LogRequestMessage;
-import cl.fseguel.awlog.message.LogResponseMessage;
+import cl.fseguel.awlog.model.message.LogRequestMessage;
+import cl.fseguel.awlog.model.message.LogResponseMessage;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;

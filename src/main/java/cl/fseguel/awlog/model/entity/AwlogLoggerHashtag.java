@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package cl.fseguel.awlog.models;
+package cl.fseguel.awlog.model.entity;
 
+import cl.fseguel.awlog.utils.reflection.BaseBean;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import javax.persistence.Basic;
@@ -29,7 +30,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "AwlogLoggerHashtag.findAll", query = "SELECT a FROM AwlogLoggerHashtag a"),
     @NamedQuery(name = "AwlogLoggerHashtag.findById", query = "SELECT a FROM AwlogLoggerHashtag a WHERE a.id = :id")})
-public class AwlogLoggerHashtag implements Serializable {
+public class AwlogLoggerHashtag extends BaseBean implements Serializable {
 
     private static final long serialVersionUID = 1L;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
@@ -74,31 +75,6 @@ public class AwlogLoggerHashtag implements Serializable {
 
     public void setLogId(AwlogLogger logId) {
         this.logId = logId;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof AwlogLoggerHashtag)) {
-            return false;
-        }
-        AwlogLoggerHashtag other = (AwlogLoggerHashtag) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "cl.fseguel.awlog.model.AwlogLoggerHashtag[ id=" + id + " ]";
     }
 
 }

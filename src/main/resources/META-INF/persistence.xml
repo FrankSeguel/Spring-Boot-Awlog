@@ -2,9 +2,9 @@
 <persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
   <persistence-unit name="awlog" transaction-type="RESOURCE_LOCAL">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
-    <class>cl.fseguel.awlog.models.AwlogHashtag</class>
-    <class>cl.fseguel.awlog.models.AwlogLoggerHashtag</class>
-    <class>cl.fseguel.awlog.models.AwlogLogger</class>
+    <class>cl.fseguel.awlog.model.entity.AwlogHashtag</class>
+    <class>cl.fseguel.awlog.model.entity.AwlogLogger</class>
+    <class>cl.fseguel.awlog.model.entity.AwlogLoggerHashtag</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://192.168.0.107:5432/awlog"/>
