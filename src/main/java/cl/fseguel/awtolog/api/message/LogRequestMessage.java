@@ -8,7 +8,6 @@ package cl.fseguel.awtolog.api.message;
 import cl.fseguel.awtolog.utils.reflection.BaseBean;
 import lombok.Getter;
 import lombok.Setter;
-import cl.fseguel.awtolog.api.dto.Hashtags;
 import java.util.List;
 /**
  *
@@ -31,6 +30,6 @@ public class LogRequestMessage extends BaseBean {
     private String stacktrace;
     @Setter
     @Getter
-    private List<Hashtags> hashtags;
+    private List<String> hashtags;
 
 }

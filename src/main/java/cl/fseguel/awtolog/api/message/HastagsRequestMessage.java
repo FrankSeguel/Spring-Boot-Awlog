@@ -5,16 +5,22 @@
  */
 package cl.fseguel.awtolog.api.message;
 
-import cl.fseguel.awtolog.api.dto.Logs;
+import cl.fseguel.awtolog.utils.reflection.BaseBean;
 import lombok.Getter;
 import lombok.Setter;
+import cl.fseguel.awtolog.api.dto.Hastags;
 /**
  *
  * @author fseguel
- * @ https://pastebin.com/q7dt2Fj3
+ * @see POST /logs Cuerpo de la petición: https://pastebin.com/HzvbZhjk
  */
-public class LogResponseMessage {
+public class HastagsRequestMessage extends BaseBean {
+
     @Setter
     @Getter
-    private Logs logs;
+    private Integer id;
+    @Setter
+    @Getter
+    private String descripcion;
+
 }

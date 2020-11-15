@@ -13,19 +13,11 @@ import lombok.Setter;
  *
  * @author fseguel
  */
-public class Hashtags extends BaseBean{
-    
+public class Hastags extends BaseBean{
     @Setter
     @Getter
-    private String user;
+    private Integer id;
     @Setter
     @Getter
-    private String apiadmin;
-    @Setter
-    @Getter
-    private String commands;
-    @Setter
-    @Getter
-    private String nullpointer;
-    
+    private String descripcion;
 }

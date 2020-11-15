@@ -6,15 +6,16 @@
 package cl.fseguel.awtolog.api.message;
 
 import cl.fseguel.awtolog.api.dto.Logs;
+import java.util.List;
 import lombok.Getter;
 import lombok.Setter;
 /**
  *
  * @author fseguel
- * @ https://pastebin.com/q7dt2Fj3
+ * @ https://pastebin.com/GpA4rzZg
  */
-public class LogResponseMessage {
+public class LogsResponseMessage {
     @Setter
     @Getter
-    private Logs logs;
+    private List<Logs> logs;
 }

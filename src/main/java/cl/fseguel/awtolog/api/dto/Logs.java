@@ -34,7 +34,7 @@ public class Logs extends BaseBean {
     private String stacktrace;
     @Setter
     @Getter
-    private List<Hashtags> hashtags;
+    private List<String> hashtags;
 
     public Logs() {
         hashtags = new ArrayList<>();
