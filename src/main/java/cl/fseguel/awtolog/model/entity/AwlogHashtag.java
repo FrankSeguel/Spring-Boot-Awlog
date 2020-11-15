@@ -38,18 +38,18 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "AwlogHashtag.findByDescription", query = "SELECT a FROM AwlogHashtag a WHERE a.description = :description")})
 public class AwlogHashtag extends BaseBean implements Serializable {
 
-    private static final long serialVersionUID = 1L;
-    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id")
     private BigDecimal id;
+    
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 50)
     @Column(name = "description")
     private String description;
+    
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "hastagId")
     private List<AwlogLoggerHashtag> awlogLoggerHashtagList;
 

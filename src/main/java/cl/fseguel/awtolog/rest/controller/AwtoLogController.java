@@ -24,9 +24,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
-import cl.fseguel.awtolog.api.message.HastagsRequestMessage;
-import org.springframework.web.bind.annotation.PutMapping;
-        
+import org.apache.commons.collections4.Get;
+
 /**
  *
  * @author fseguel
@@ -57,7 +56,7 @@ public class AwtoLogController {
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public void logsPost(@RequestBody final LogRequestMessage request, HttpServletResponse res) throws Exception {
-        
+
     }
 
     /**
@@ -78,7 +77,7 @@ public class AwtoLogController {
     @ResponseBody
     public LogsResponseMessage logsGet(HttpServletResponse res) throws Exception {
         LogsResponseMessage response = new LogsResponseMessage();
-        
+
         return response;
     }
 
@@ -100,10 +99,10 @@ public class AwtoLogController {
     @ResponseBody
     public LogsResponseMessage hashtagGet(@RequestBody final String request, HttpServletResponse res) throws Exception {
         LogsResponseMessage response = new LogsResponseMessage();
-        
+
         return response;
     }
-    
+
     /**
      *
      *
@@ -125,25 +124,5 @@ public class AwtoLogController {
         response.setLogs(new Logs());
         return response;
     }
-    
-    /**
-     *
-     *
-     * @param request Peticion.
-     * @see Get /logs Cuerpo de la petición: https://pastebin.com/q7dt2Fj3
-     *
-     */
-    @ApiOperation(value = "logs", response = LogResponseMessage.class,
-            code = 200, notes = "Servicio REST/JSON que mapea contra la operación log del servicio SOAP de AwtoLogController.")
-    @ApiResponses(value = {
-        @ApiResponse(code = 200, message = "Listado de parametros obtenidos con éxito"),
-        @ApiResponse(code = 401, message = "Error en la autorización para consultar el recurso."),
-        @ApiResponse(code = 403, message = "Acceso no permitido para consultar el recurso"),
-        @ApiResponse(code = 404, message = "Recurso no encontrado")})
-    @PutMapping(value = "/{hastags}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    @ResponseBody
-    public void hastags(@RequestBody final HastagsRequestMessage request, HttpServletResponse res) throws Exception {
-        
-    }
-    
+
 }

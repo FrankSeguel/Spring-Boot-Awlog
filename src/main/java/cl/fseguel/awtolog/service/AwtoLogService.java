@@ -5,10 +5,17 @@
  */
 package cl.fseguel.awtolog.service;
 
+import cl.fseguel.awtolog.api.message.HastagsRequestMessage;
+import cl.fseguel.awtolog.api.message.LogRequestMessage;
+
 /**
  *
  * @author fseguel
  */
 public interface AwtoLogService {
+    
+    public String saveHashtags(HastagsRequestMessage request);
+    
+    public String saveLogs(LogRequestMessage request);
     
 }

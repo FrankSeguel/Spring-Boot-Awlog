@@ -15,5 +15,7 @@ public class Constantes {
     public static final String SORT_DIRECTION_DESCENDING = "desc";
     public static final String NO_PAGINATION = "-1";
     public static final String NO_SORT = "";
-    
+    public static final String PERSISTENCE_UNIT_NAME = "awlog";
+    public static final String BAD_REQUEST = "BAD_REQUEST";
+    public static final String OK_REQUEST = "OK";
 }
