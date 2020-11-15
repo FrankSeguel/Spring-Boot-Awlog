@@ -39,9 +39,11 @@ public class AwlogLoggerHashtag extends BaseBean implements Serializable {
     @NotNull
     @Column(name = "id")
     private BigDecimal id;
+    
     @JoinColumn(name = "hastag_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private AwlogHashtag hastagId;
+    
     @JoinColumn(name = "log_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private AwlogLogger logId;

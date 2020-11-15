@@ -6,6 +6,9 @@
 package cl.fseguel.awtolog.business;
 
 import cl.fseguel.awtolog.api.dto.Hastags;
+import cl.fseguel.awtolog.api.dto.Logs;
+import java.util.List;
+
 /**
  *
  * @author fseguel
@@ -13,5 +16,9 @@ import cl.fseguel.awtolog.api.dto.Hastags;
 public interface AwtoLogBusiness {
     
     public String saveHastags(Hastags hastags);
+    
+    public String saveLogs(Logs logs);
+    
+    public List<Logs> findByAll();
     
 }

@@ -17,5 +17,6 @@ public class Constantes {
     public static final String NO_SORT = "";
     public static final String PERSISTENCE_UNIT_NAME = "awlog";
     public static final String BAD_REQUEST = "BAD_REQUEST";
+    public static final String BAD_REQUEST_HASHTAGS_DES_REQ = "BAD_REQUEST";
     public static final String OK_REQUEST = "OK";
 }

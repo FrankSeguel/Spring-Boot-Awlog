@@ -9,6 +9,7 @@ import cl.fseguel.awtolog.api.dto.Logs;
 import cl.fseguel.awtolog.api.message.LogRequestMessage;
 import cl.fseguel.awtolog.api.message.LogResponseMessage;
 import cl.fseguel.awtolog.api.message.LogsResponseMessage;
+import cl.fseguel.awtolog.model.util.Constantes;
 import cl.fseguel.awtolog.service.AwtoLogService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -50,13 +51,21 @@ public class AwtoLogController {
             code = 200, notes = "Servicio REST/JSON que mapea contra la operación log del servicio SOAP de AwtoLogController.")
     @ApiResponses(value = {
         @ApiResponse(code = 200, message = "Listado de parametros obtenidos con éxito"),
+        @ApiResponse(code = 400, message = "Existe mas de un registro repetido hashtag."),
         @ApiResponse(code = 401, message = "Error en la autorización para consultar el recurso."),
         @ApiResponse(code = 403, message = "Acceso no permitido para consultar el recurso"),
         @ApiResponse(code = 404, message = "Recurso no encontrado")})
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public void logsPost(@RequestBody final LogRequestMessage request, HttpServletResponse res) throws Exception {
-
+        String response = awtoLogService.saveLogs(request);
+        if (Constantes.OK_REQUEST.equals(response)) {
+            res.setStatus(HttpServletResponse.SC_OK);
+        } else if (Constantes.BAD_REQUEST_HASHTAGS_DES_REQ.equals(response)) {
+            res.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+        } else if (Constantes.BAD_REQUEST.equals(response)) {
+            res.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+        }
     }
 
     /**
@@ -66,18 +75,19 @@ public class AwtoLogController {
      * @see Get /logs Cuerpo de la petición: https://pastebin.com/HzvbZhjk
      *
      */
-    @ApiOperation(value = "logs", response = LogResponseMessage.class,
+    @ApiOperation(value = "logs", response = LogsResponseMessage.class,
             code = 200, notes = "Servicio REST/JSON que mapea contra la operación log del servicio SOAP de AwtoLogController.")
     @ApiResponses(value = {
         @ApiResponse(code = 200, message = "Listado de parametros obtenidos con éxito"),
         @ApiResponse(code = 401, message = "Error en la autorización para consultar el recurso."),
         @ApiResponse(code = 403, message = "Acceso no permitido para consultar el recurso"),
         @ApiResponse(code = 404, message = "Recurso no encontrado")})
-    @GetMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public LogsResponseMessage logsGet(HttpServletResponse res) throws Exception {
+    public LogsResponseMessage logsGet() {
         LogsResponseMessage response = new LogsResponseMessage();
-
+        response.setLogs( awtoLogService.findByAll() );
+        
         return response;
     }
 

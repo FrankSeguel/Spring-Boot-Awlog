@@ -5,8 +5,10 @@
  */
 package cl.fseguel.awtolog.service;
 
+import cl.fseguel.awtolog.api.dto.Logs;
 import cl.fseguel.awtolog.api.message.HastagsRequestMessage;
 import cl.fseguel.awtolog.api.message.LogRequestMessage;
+import java.util.List;
 
 /**
  *
@@ -17,5 +19,7 @@ public interface AwtoLogService {
     public String saveHashtags(HastagsRequestMessage request);
     
     public String saveLogs(LogRequestMessage request);
+    
+    public List<Logs> findByAll();
     
 }

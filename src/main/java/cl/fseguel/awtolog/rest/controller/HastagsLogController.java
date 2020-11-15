@@ -56,7 +56,7 @@ public class HastagsLogController {
     @ResponseBody
     public void hastags(@RequestBody final HastagsRequestMessage request, HttpServletResponse res) throws Exception {
         String response = awtoLogService.saveHashtags(request);
-        if (Constantes.BAD_REQUEST.equals(request)) {
+        if (Constantes.BAD_REQUEST.equals(response)) {
             res.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
         }
 

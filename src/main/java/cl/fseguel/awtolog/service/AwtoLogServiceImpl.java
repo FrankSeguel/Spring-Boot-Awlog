@@ -8,7 +8,9 @@ package cl.fseguel.awtolog.service;
 import cl.fseguel.awtolog.api.message.HastagsRequestMessage;
 import org.springframework.stereotype.Service;
 import cl.fseguel.awtolog.api.dto.Hastags;
+import cl.fseguel.awtolog.api.dto.Logs;
 import cl.fseguel.awtolog.api.message.LogRequestMessage;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
@@ -16,22 +18,35 @@ import org.springframework.beans.factory.annotation.Autowired;
  * @author fseguel
  */
 @Service
-public class AwtoLogServiceImpl implements AwtoLogService{
+public class AwtoLogServiceImpl implements AwtoLogService {
 
     @Autowired
     private AwtoLogFacade awtoLogFacade;
-    
+
     @Override
     public String saveHashtags(HastagsRequestMessage request) {
         Hastags hastags = new Hastags();
-        hastags.setId( request.getId() );
-        hastags.setDescripcion( request.getDescripcion() );
-        
+        hastags.setId(request.getId());
+        hastags.setDescripcion(request.getDescripcion());
+
         return awtoLogFacade.saveHashtags(hastags);
     }
-    
-    public String saveLogs(LogRequestMessage request){
-        return null;
+
+    @Override
+    public String saveLogs(LogRequestMessage request) {
+        Logs logs = new Logs();
+        logs.setDetails(request.getDetails());
+        logs.setHashtags(request.getHashtags());
+        logs.setHost(request.getHost());
+        logs.setOrigin(request.getOrigin());
+        logs.setStacktrace(request.getStacktrace());
+
+        return awtoLogFacade.saveLogs(logs);
     }
-    
+
+    @Override
+    public List<Logs> findByAll() {
+        return awtoLogFacade.findByAll();
+    }
+
 }

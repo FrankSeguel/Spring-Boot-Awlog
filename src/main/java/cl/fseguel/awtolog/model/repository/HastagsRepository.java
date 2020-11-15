@@ -6,6 +6,7 @@
 package cl.fseguel.awtolog.model.repository;
 
 import cl.fseguel.awtolog.model.entity.AwlogHashtag;
+import cl.fseguel.awtolog.model.entity.AwlogLoggerHashtag;
 import cl.fseguel.awtolog.model.util.Constantes;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -30,54 +31,60 @@ public class HastagsRepository {
         factory = Persistence.createEntityManagerFactory(Constantes.PERSISTENCE_UNIT_NAME);
     }
 
-    public void save(AwlogHashtag hashtag) {
+    public AwlogHashtag save(AwlogHashtag hashtag) {
         EntityManager em = factory.createEntityManager();
         em.getTransaction().begin();
         em.persist(hashtag);
         em.getTransaction().commit();
-        em.flush();
         em.close();
+        return hashtag;
     }
-    
-    public void refresh(AwlogHashtag hashtag) {
+
+    public AwlogHashtag refresh(AwlogHashtag hashtag) {
         EntityManager em = factory.createEntityManager();
         em.getTransaction().begin();
         em.refresh(hashtag);
         em.getTransaction().commit();
-        em.flush();
         em.close();
+        return hashtag;
     }
-    
+
+    public AwlogLoggerHashtag save(AwlogLoggerHashtag loggerHashtag) {
+        EntityManager em = factory.createEntityManager();
+        em.getTransaction().begin();
+        em.persist(loggerHashtag);
+        em.getTransaction().commit();
+        em.close();
+        return loggerHashtag;
+    }
+
     public List<AwlogHashtag> findById(Integer id) {
         EntityManager em = factory.createEntityManager();
         em.getTransaction().begin();
         Query q = em.createQuery("SELECT a FROM AwlogHashtag a WHERE a.id = :id ORDER BY a.description ASC ");
         q.setParameter("id", id);
         List<AwlogHashtag> awlogHashtagList = q.getResultList();
-        em.flush();
         em.close();
         return awlogHashtagList;
     }
-    
+
     public List<AwlogHashtag> findByDescription(String descripcion) {
         EntityManager em = factory.createEntityManager();
         em.getTransaction().begin();
         Query q = em.createQuery("SELECT a FROM AwlogHashtag a WHERE a.description = :description ORDER BY a.description ASC ");
         q.setParameter("description", descripcion);
         List<AwlogHashtag> awlogHashtagList = q.getResultList();
-        em.flush();
         em.close();
         return awlogHashtagList;
     }
 
-    public List<AwlogHashtag> findByAll(String descripcion) {
+    public List<AwlogHashtag> findByAll() {
         EntityManager em = factory.createEntityManager();
         em.getTransaction().begin();
         Query q = em.createQuery("SELECT a FROM AwlogHashtag a ORDER BY a.description ASC ");
         List<AwlogHashtag> awlogHashtagList = q.getResultList();
-        em.flush();
         em.close();
         return awlogHashtagList;
     }
-    
+
 }

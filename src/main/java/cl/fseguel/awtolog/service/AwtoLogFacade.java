@@ -6,6 +6,8 @@
 package cl.fseguel.awtolog.service;
 
 import cl.fseguel.awtolog.api.dto.Hastags;
+import cl.fseguel.awtolog.api.dto.Logs;
+import java.util.List;
 
 /**
  *
@@ -14,4 +16,9 @@ import cl.fseguel.awtolog.api.dto.Hastags;
 public interface AwtoLogFacade {
     
     public String saveHashtags(Hastags hastags);
+    
+    public String saveLogs(Logs logs);
+    
+    public List<Logs> findByAll();
+    
 }
