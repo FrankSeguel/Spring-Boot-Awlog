@@ -54,4 +54,8 @@ public class AwtoLogServiceImpl implements AwtoLogService {
         return awtoLogFacade.findByAllHashtag(hashtag);
     }
 
+    @Override
+    public Logs findByLogId(Integer logId) {
+        return awtoLogFacade.findByLogId(logId);
+    }
 }

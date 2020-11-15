@@ -56,14 +56,15 @@ public class AwtoLogRepository {
         em.close();
         return AwlogHashtag;
     }
+    
+    public AwlogLogger findByLogId(Integer logId) {
+        EntityManager em = factory.createEntityManager();
+        em.getTransaction().begin();
+        Query q = em.createQuery(" SELECT a FROM AwlogLogger a WHERE a.id = :logId ");
+        q.setParameter("logId", logId);
+        AwlogLogger AwlogHashtag = (AwlogLogger) q.getSingleResult();
+        em.close();
+        return AwlogHashtag;
+    }
 
 }
-/*
-SELECT 
-lg
-FROM awlog_logger lg 
-inner join awlog_logger_hashtag lh on (lh.log_id = lg.id) 
-inner join awlog_hashtag ah on (ah.id = lh.hastag_id)
-where ah.description = 'hola'
-order by lg.creation_date DESC
-*/

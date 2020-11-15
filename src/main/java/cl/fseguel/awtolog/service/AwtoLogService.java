@@ -24,4 +24,5 @@ public interface AwtoLogService {
     
     public List<Logs> findByAllHashtag(String hashtag);
     
+    public Logs findByLogId(Integer logId);
 }

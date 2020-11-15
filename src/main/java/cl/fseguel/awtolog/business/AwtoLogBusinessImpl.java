@@ -135,4 +135,16 @@ public class AwtoLogBusinessImpl implements AwtoLogBusiness {
         });
         return lst;
     }
+
+    @Override
+    public Logs findByLogId(Integer logId) {
+        AwlogLogger awlogLogger = awtoLogRepository.findByLogId(logId);
+        Logs logs = new Logs();
+        BeanUtils.copyProperties(awlogLogger, logs);
+        logs.setId(awlogLogger.getId().intValue());
+        for (AwlogLoggerHashtag ht : awlogLogger.getAwlogLoggerHashtagList()) {
+            logs.getHashtags().add(ht.getHastagId().getDescription());
+        }
+        return logs;
+    }
 }

@@ -47,4 +47,9 @@ public class AwtoLogFacadeImpl implements AwtoLogFacade {
     public List<Logs> findByAllHashtag(String hashtag) {
         return awtoLogBusiness.findByAllHashtag(hashtag);
     }
+    
+    @Override
+    public Logs findByLogId(Integer logId) {
+        return awtoLogBusiness.findByLogId(logId);
+    }
 }
