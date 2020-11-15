@@ -3,20 +3,23 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package cl.fseguel.awtolog.api.message;
+package cl.fseguel.awtolog.api.dto;
 
 import cl.fseguel.awtolog.utils.reflection.BaseBean;
+import java.util.ArrayList;
+import java.util.List;
 import lombok.Getter;
 import lombok.Setter;
-import cl.fseguel.awtolog.api.dto.Hashtags;
-import java.util.List;
+
 /**
  *
  * @author fseguel
- * @see POST /logs Cuerpo de la petición: https://pastebin.com/HzvbZhjk
  */
-public class LogRequestMessage extends BaseBean {
-
+public class Logs extends BaseBean {
+    
+    @Setter
+    @Getter
+    private Integer id;
     @Setter
     @Getter
     private String host;
@@ -33,4 +36,8 @@ public class LogRequestMessage extends BaseBean {
     @Getter
     private List<Hashtags> hashtags;
 
+    public Logs() {
+        hashtags = new ArrayList<>();
+    }
+    
 }

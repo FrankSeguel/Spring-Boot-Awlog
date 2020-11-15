@@ -3,34 +3,29 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package cl.fseguel.awtolog.api.message;
+package cl.fseguel.awtolog.api.dto;
 
 import cl.fseguel.awtolog.utils.reflection.BaseBean;
 import lombok.Getter;
 import lombok.Setter;
-import cl.fseguel.awtolog.api.dto.Hashtags;
-import java.util.List;
+
 /**
  *
  * @author fseguel
- * @see POST /logs Cuerpo de la petición: https://pastebin.com/HzvbZhjk
  */
-public class LogRequestMessage extends BaseBean {
-
+public class Hashtags extends BaseBean{
+    
     @Setter
     @Getter
-    private String host;
+    private String user;
     @Setter
     @Getter
-    private String origin;
+    private String apiadmin;
     @Setter
     @Getter
-    private String details;
+    private String commands;
     @Setter
     @Getter
-    private String stacktrace;
-    @Setter
-    @Getter
-    private List<Hashtags> hashtags;
-
+    private String nullpointer;
+    
 }

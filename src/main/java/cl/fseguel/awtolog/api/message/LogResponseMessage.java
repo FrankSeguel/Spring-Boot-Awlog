@@ -5,13 +5,18 @@
  */
 package cl.fseguel.awtolog.api.message;
 
+import cl.fseguel.awtolog.api.dto.Logs;
+import lombok.Getter;
+import lombok.Setter;
 /**
  *
  * @author fseguel
  * @ https://pastebin.com/GpA4rzZg
  */
 public class LogResponseMessage {
-    
+    @Setter
+    @Getter
+    private Logs logs;
 }
 
 /*
