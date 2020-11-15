@@ -108,7 +108,7 @@ public class AwtoLogController {
         @ApiResponse(code = 404, message = "Recurso no encontrado")})
     @GetMapping("/{hashtag}")
     @ResponseBody
-    public LogsResponseMessage hashtagGet(@RequestParam final String request) {
+    public LogsResponseMessage hashtagGet(@RequestParam("hashtag") final String request) {
         LogsResponseMessage response = new LogsResponseMessage();
         response.setLogs(awtoLogService.findByAllHashtag(request));
         return response;
@@ -130,7 +130,7 @@ public class AwtoLogController {
         @ApiResponse(code = 404, message = "Recurso no encontrado")})
     @GetMapping("/{logId}")
     @ResponseBody
-    public LogResponseMessage logsGetId(@PathVariable final Integer request) {
+    public LogResponseMessage logsGetId(@RequestParam("logId") final Integer request) {
         LogResponseMessage response = new LogResponseMessage();
         response.setLogs( awtoLogService.findByLogId(request) );
         return response;
