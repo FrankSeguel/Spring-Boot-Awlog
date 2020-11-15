@@ -9,6 +9,7 @@
             <goal>clean</goal>
             <goal>package</goal>
             <goal>install</goal>
+            <goal>sonar:sonar</goal>
         </goals>
         <properties>
             <skipTests>true</skipTests>

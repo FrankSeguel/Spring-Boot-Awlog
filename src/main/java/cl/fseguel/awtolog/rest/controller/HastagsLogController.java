@@ -55,11 +55,12 @@ public class HastagsLogController {
     @PutMapping(value = "/{hastags}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public void hastags(@RequestBody final HastagsRequestMessage request, HttpServletResponse res) {
+        logger.info("HastagsLogController :: hastags :: Request({})", request);
         String response = awtoLogService.saveHashtags(request);
         if (Constantes.BAD_REQUEST.equals(response)) {
             res.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
         }
-
+        logger.info("HastagsLogController :: hastags :: Response({})", response, res);
     }
 
 }

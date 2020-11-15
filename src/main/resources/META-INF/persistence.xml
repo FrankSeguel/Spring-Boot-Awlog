@@ -8,9 +8,9 @@
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://192.168.0.107:5432/awlog"/>
-      <property name="javax.persistence.jdbc.user" value="postgres"/>
+      <property name="javax.persistence.jdbc.user" value="ownerawlog"/>
       <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver"/>
-      <property name="javax.persistence.jdbc.password" value="fseguel220"/>
+      <property name="javax.persistence.jdbc.password" value="ownerawlog"/>
     </properties>
   </persistence-unit>
 </persistence>

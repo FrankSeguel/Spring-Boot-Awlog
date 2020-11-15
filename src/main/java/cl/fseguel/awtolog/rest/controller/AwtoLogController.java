@@ -25,7 +25,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.apache.commons.collections4.Get;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
 /**
@@ -44,9 +43,10 @@ public class AwtoLogController {
     /**
      *
      *
-     * @param request Peticion.
+     * @param LogRequestMessage request.
+     * @param HttpServletResponse res.
      * @see POST /logs Cuerpo de la petición: https://pastebin.com/HzvbZhjk
-     *
+     * @see Servicio que permite registrar logs
      */
     @ApiOperation(value = "logs", response = LogResponseMessage.class,
             code = 200, notes = "Servicio REST/JSON que mapea contra la operación log del servicio SOAP de AwtoLogController.")
@@ -59,14 +59,17 @@ public class AwtoLogController {
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public void logsPost(@RequestBody final LogRequestMessage request, HttpServletResponse res) {
+        logger.info("AwtoLogController :: logsPost :: Request({})", request);
+
         String response = awtoLogService.saveLogs(request);
+
         if (Constantes.OK_REQUEST.equals(response)) {
             res.setStatus(HttpServletResponse.SC_OK);
         } else if (Constantes.BAD_REQUEST_HASHTAGS_DES_REQ.equals(response)) {
             res.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-        } else if (Constantes.BAD_REQUEST.equals(response)) {
-            res.setStatus(HttpServletResponse.SC_BAD_REQUEST);
         }
+
+        logger.info("AwtoLogController :: logsPost :: Response({})", response, res);
     }
 
     /**
@@ -86,9 +89,10 @@ public class AwtoLogController {
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public LogsResponseMessage logsGet() {
+        logger.info("AwtoLogController :: logsGet");
         LogsResponseMessage response = new LogsResponseMessage();
         response.setLogs(awtoLogService.findByAll());
-
+        logger.info("AwtoLogController :: logsPost :: Response({})", response);
         return response;
     }
 
@@ -109,8 +113,10 @@ public class AwtoLogController {
     @GetMapping("/{hashtag}")
     @ResponseBody
     public LogsResponseMessage hashtagGet(@RequestParam("hashtag") final String request) {
+        logger.info("AwtoLogController :: hashtagGet :: Request({})", request);
         LogsResponseMessage response = new LogsResponseMessage();
         response.setLogs(awtoLogService.findByAllHashtag(request));
+        logger.info("AwtoLogController :: hashtagGet :: Response({})", response);
         return response;
     }
 
@@ -131,8 +137,10 @@ public class AwtoLogController {
     @GetMapping("/{logId}")
     @ResponseBody
     public LogResponseMessage logsGetId(@RequestParam("logId") final Integer request) {
+        logger.info("AwtoLogController :: logsGetId :: Request({})", request);
         LogResponseMessage response = new LogResponseMessage();
-        response.setLogs( awtoLogService.findByLogId(request) );
+        response.setLogs(awtoLogService.findByLogId(request));
+        logger.info("AwtoLogController :: logsGetId :: Response({})", response);
         return response;
     }
 

@@ -51,7 +51,8 @@ public class AwlogLogger extends BaseBean implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id")
-    private BigDecimal id;
+    private Integer id;
+    
     @Basic(optional = false)
     @NotNull
     @Column(name = "creation_date")
@@ -83,11 +84,11 @@ public class AwlogLogger extends BaseBean implements Serializable {
     public AwlogLogger() {
     }
 
-    public AwlogLogger(BigDecimal id) {
+    public AwlogLogger(Integer id) {
         this.id = id;
     }
 
-    public AwlogLogger(BigDecimal id, Date creationDate, String host, String origin, String details, String stacktrace) {
+    public AwlogLogger(Integer id, Date creationDate, String host, String origin, String details, String stacktrace) {
         this.id = id;
         this.creationDate = creationDate;
         this.host = host;
@@ -96,11 +97,11 @@ public class AwlogLogger extends BaseBean implements Serializable {
         this.stacktrace = stacktrace;
     }
 
-    public BigDecimal getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(BigDecimal id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

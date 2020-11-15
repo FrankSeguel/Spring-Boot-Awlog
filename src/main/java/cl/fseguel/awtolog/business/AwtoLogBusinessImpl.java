@@ -5,21 +5,21 @@
  */
 package cl.fseguel.awtolog.business;
 
-import cl.fseguel.awtolog.model.repository.HastagsRepository;
 import org.springframework.stereotype.Service;
 import cl.fseguel.awtolog.api.dto.Hastags;
 import cl.fseguel.awtolog.api.dto.Logs;
+import cl.fseguel.awtolog.model.dao.AwtoLogDAO;
 import cl.fseguel.awtolog.model.entity.AwlogHashtag;
 import cl.fseguel.awtolog.model.entity.AwlogLogger;
 import cl.fseguel.awtolog.model.entity.AwlogLoggerHashtag;
-import cl.fseguel.awtolog.model.repository.AwtoLogRepository;
 import cl.fseguel.awtolog.model.util.Constantes;
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.apache.commons.collections4.CollectionUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -30,10 +30,10 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class AwtoLogBusinessImpl implements AwtoLogBusiness {
 
+    private static final Logger logger = LoggerFactory.getLogger(AwtoLogBusinessImpl.class);
+
     @Autowired
-    private HastagsRepository hastagsRepository;
-    @Autowired
-    private AwtoLogRepository awtoLogRepository;
+    private AwtoLogDAO awtoLogDAO;
 
     /**
      * @see PUT /hastags:
@@ -48,19 +48,19 @@ public class AwtoLogBusinessImpl implements AwtoLogBusiness {
     @Override
     public String saveHastags(Hastags hastags) {
         AwlogHashtag hash = new AwlogHashtag();
-        hash.setId(BigDecimal.valueOf(hastags.getId()));
+        hash.setId(hastags.getId());
         hash.setDescription(hastags.getDescripcion());
 
-        List<AwlogHashtag> lista = hastagsRepository.findByDescription(hastags.getDescripcion());
+        List<AwlogHashtag> lista = awtoLogDAO.findByDescription(hastags.getDescripcion());
         if (CollectionUtils.isNotEmpty(lista)) {
             if (lista.size() > 1) {
                 return Constantes.BAD_REQUEST;
             } else {
-                hastagsRepository.save(hash);
+                awtoLogDAO.saveAwlogHashtag(hash);
                 return Constantes.OK_REQUEST;
             }
         } else {
-            hastagsRepository.save(hash);
+            awtoLogDAO.saveAwlogHashtag(hash);
             return Constantes.OK_REQUEST;
         }
     }
@@ -69,32 +69,41 @@ public class AwtoLogBusinessImpl implements AwtoLogBusiness {
     @Transactional
     public String saveLogs(Logs logs) {
 
-        AwlogLogger logger = new AwlogLogger();
-        logger.setCreationDate(new Date());
-        logger.setDetails(logs.getDetails());
-        logger.setHost(logs.getHost());
+        AwlogLogger awlogLogger = new AwlogLogger();
+        awlogLogger.setCreationDate(new Date());
+        awlogLogger.setDetails(logs.getDetails());
+        awlogLogger.setHost(logs.getHost());
         if (logs.getId() != null) {
-            logger.setId(BigDecimal.valueOf(logs.getId()));
+            awlogLogger.setId(logs.getId());
         }
-        logger.setOrigin(logs.getOrigin());
-        logger.setStacktrace(logs.getStacktrace());
+        awlogLogger.setOrigin(logs.getOrigin());
+        awlogLogger.setStacktrace(logs.getStacktrace());
 
-        awtoLogRepository.save(logger);
+        awtoLogDAO.saveAwlogLogger(awlogLogger);
 
         logs.getHashtags().stream().map(htg -> {
-            AwlogHashtag hash = new AwlogHashtag();
-            hash.setDescription(htg);
-            return hash;
+            AwlogHashtag awlogHashtag = new AwlogHashtag();
+            awlogHashtag.setDescription(htg);
+            return awlogHashtag;
+        }).map(awlogHashtag -> {
+            //Verificamos si el Hashtags existe en la base de datos
+            List<AwlogHashtag> lista = awtoLogDAO.findByDescription(awlogHashtag.getDescription());
+            if (!CollectionUtils.isEmpty(lista) && lista.size()>0) {
+                //El AwlogHashtag Existe y lo recuperamos
+                awlogHashtag = lista.get(0);
+            } else {
+                //El AwlogHashtag no Existe y lo grabamos
+                awtoLogDAO.saveAwlogHashtag(awlogHashtag);
+            }
+            return awlogHashtag;
         }).map(hash -> {
-            hastagsRepository.save(hash);
-            return hash;
-        }).map(hash -> {
-            AwlogLoggerHashtag lh = new AwlogLoggerHashtag();
-            lh.setLogId(logger);
-            lh.setHastagId(hash);
-            return lh;
-        }).forEachOrdered(lh -> {
-            hastagsRepository.save(lh);
+            AwlogLoggerHashtag awlogLoggerHashtag = new AwlogLoggerHashtag();
+            awlogLoggerHashtag.setLogId(awlogLogger);
+            awlogLoggerHashtag.setHastagId(hash);
+            return awlogLoggerHashtag;
+        }).forEachOrdered(awlogLoggerHashtag -> {
+            //Grabamos la relacion del log y el Hashtags
+            awtoLogDAO.saveAwlogLoggerHashtag(awlogLoggerHashtag);
         });
 
         return Constantes.OK_REQUEST;
@@ -102,12 +111,12 @@ public class AwtoLogBusinessImpl implements AwtoLogBusiness {
 
     @Override
     public List<Logs> findByAll() {
-        List<AwlogLogger> lista = awtoLogRepository.findByAll();
+        List<AwlogLogger> lista = awtoLogDAO.findByAllAwlogLogger();
         List<Logs> lst = new ArrayList<>();
         lista.stream().map(log -> {
             Logs dto = new Logs();
             BeanUtils.copyProperties(log, dto);
-            dto.setId(log.getId().intValue());
+            dto.setId(log.getId());
             for (AwlogLoggerHashtag ht : log.getAwlogLoggerHashtagList()) {
                 dto.getHashtags().add(ht.getHastagId().getDescription());
             }
@@ -120,12 +129,12 @@ public class AwtoLogBusinessImpl implements AwtoLogBusiness {
 
     @Override
     public List<Logs> findByAllHashtag(String hashtag) {
-        List<AwlogLogger> lista = awtoLogRepository.findByAllHashtag(hashtag);
+        List<AwlogLogger> lista = awtoLogDAO.findByAllAwlogLogger(hashtag);
         List<Logs> lst = new ArrayList<>();
         lista.stream().map(log -> {
             Logs dto = new Logs();
             BeanUtils.copyProperties(log, dto);
-            dto.setId(log.getId().intValue());
+            dto.setId(log.getId());
             for (AwlogLoggerHashtag ht : log.getAwlogLoggerHashtagList()) {
                 dto.getHashtags().add(ht.getHastagId().getDescription());
             }
@@ -138,10 +147,10 @@ public class AwtoLogBusinessImpl implements AwtoLogBusiness {
 
     @Override
     public Logs findByLogId(Integer logId) {
-        AwlogLogger awlogLogger = awtoLogRepository.findByLogId(logId);
+        AwlogLogger awlogLogger = awtoLogDAO.findAwlogLoggerByLogId(logId);
         Logs logs = new Logs();
         BeanUtils.copyProperties(awlogLogger, logs);
-        logs.setId(awlogLogger.getId().intValue());
+        logs.setId(awlogLogger.getId());
         for (AwlogLoggerHashtag ht : awlogLogger.getAwlogLoggerHashtagList()) {
             logs.getHashtags().add(ht.getHastagId().getDescription());
         }

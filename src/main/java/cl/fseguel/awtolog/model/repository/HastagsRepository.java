@@ -71,7 +71,7 @@ public class HastagsRepository {
     public List<AwlogHashtag> findByDescription(String descripcion) {
         EntityManager em = factory.createEntityManager();
         em.getTransaction().begin();
-        Query q = em.createQuery("SELECT a FROM AwlogHashtag a WHERE a.description = :description ORDER BY a.description DESC ");
+        Query q = em.createQuery("SELECT a FROM AwlogHashtag a WHERE a.description = :description ");
         q.setParameter("description", descripcion);
         List<AwlogHashtag> awlogHashtagList = q.getResultList();
         em.close();

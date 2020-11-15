@@ -7,17 +7,17 @@ package cl.fseguel.awtolog.model.entity;
 
 import cl.fseguel.awtolog.utils.reflection.BaseBean;
 import java.io.Serializable;
-import java.math.BigDecimal;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -35,10 +35,10 @@ public class AwlogLoggerHashtag extends BaseBean implements Serializable {
     private static final long serialVersionUID = 1L;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @NotNull
     @Column(name = "id")
-    private BigDecimal id;
+    private Integer id;
     
     @JoinColumn(name = "hastag_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
@@ -51,15 +51,15 @@ public class AwlogLoggerHashtag extends BaseBean implements Serializable {
     public AwlogLoggerHashtag() {
     }
 
-    public AwlogLoggerHashtag(BigDecimal id) {
+    public AwlogLoggerHashtag(Integer id) {
         this.id = id;
     }
 
-    public BigDecimal getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(BigDecimal id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

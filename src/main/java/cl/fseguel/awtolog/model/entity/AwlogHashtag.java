@@ -42,7 +42,7 @@ public class AwlogHashtag extends BaseBean implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id")
-    private BigDecimal id;
+    private Integer id;
     
     @Basic(optional = false)
     @NotNull
@@ -56,20 +56,20 @@ public class AwlogHashtag extends BaseBean implements Serializable {
     public AwlogHashtag() {
     }
 
-    public AwlogHashtag(BigDecimal id) {
+    public AwlogHashtag(Integer id) {
         this.id = id;
     }
 
-    public AwlogHashtag(BigDecimal id, String description) {
+    public AwlogHashtag(Integer id, String description) {
         this.id = id;
         this.description = description;
     }
 
-    public BigDecimal getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(BigDecimal id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

@@ -19,4 +19,9 @@ public class Constantes {
     public static final String BAD_REQUEST = "BAD_REQUEST";
     public static final String BAD_REQUEST_HASHTAGS_DES_REQ = "BAD_REQUEST";
     public static final String OK_REQUEST = "OK";
+    public static final String HASHTAGS_PERFORMANCE = "#awto_performance";
+    public static final String HASHTAGS_EXCEPTION = "#awto_exception";
+    public static final String ORIGEN_AWTOLOGS = "AWTOLOGS";
+    public static final String HOST_AWTOLOGS = "localhost";
+    
 }
