@@ -48,5 +48,10 @@ public class AwtoLogServiceImpl implements AwtoLogService {
     public List<Logs> findByAll() {
         return awtoLogFacade.findByAll();
     }
+    
+    @Override
+    public List<Logs> findByAllHashtag(String hashtag) {
+        return awtoLogFacade.findByAllHashtag(hashtag);
+    }
 
 }

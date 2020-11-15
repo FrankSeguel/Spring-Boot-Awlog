@@ -18,28 +18,33 @@ import org.springframework.stereotype.Service;
  * @author fseguel
  */
 @Service
-public class AwtoLogFacadeImpl implements AwtoLogFacade{
-    
+public class AwtoLogFacadeImpl implements AwtoLogFacade {
+
     @Autowired
     private AwtoLogBusiness awtoLogBusiness;
-    
+
     @Override
-    public String saveHashtags(Hastags hastags){
-        
-        if(hastags!=null && hastags.getDescripcion()==null){
+    public String saveHashtags(Hastags hastags) {
+
+        if (hastags != null && hastags.getDescripcion() == null) {
             return Constantes.BAD_REQUEST_HASHTAGS_DES_REQ;
         }
-        
+
         return awtoLogBusiness.saveHastags(hastags);
     }
-    
+
     @Override
-    public String saveLogs(Logs logs){
+    public String saveLogs(Logs logs) {
         return awtoLogBusiness.saveLogs(logs);
     }
-    
+
     @Override
-    public List<Logs> findByAll(){
+    public List<Logs> findByAll() {
         return awtoLogBusiness.findByAll();
+    }
+
+    @Override
+    public List<Logs> findByAllHashtag(String hashtag) {
+        return awtoLogBusiness.findByAllHashtag(hashtag);
     }
 }

@@ -21,4 +21,6 @@ public interface AwtoLogBusiness {
     
     public List<Logs> findByAll();
     
+    public List<Logs> findByAllHashtag(String hashtag);
+    
 }

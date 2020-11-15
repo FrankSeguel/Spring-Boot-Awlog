@@ -26,6 +26,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.apache.commons.collections4.Get;
+import org.springframework.web.bind.annotation.PathVariable;
 
 /**
  *
@@ -57,7 +58,7 @@ public class AwtoLogController {
         @ApiResponse(code = 404, message = "Recurso no encontrado")})
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public void logsPost(@RequestBody final LogRequestMessage request, HttpServletResponse res) throws Exception {
+    public void logsPost(@RequestBody final LogRequestMessage request, HttpServletResponse res) {
         String response = awtoLogService.saveLogs(request);
         if (Constantes.OK_REQUEST.equals(response)) {
             res.setStatus(HttpServletResponse.SC_OK);
@@ -86,8 +87,8 @@ public class AwtoLogController {
     @ResponseBody
     public LogsResponseMessage logsGet() {
         LogsResponseMessage response = new LogsResponseMessage();
-        response.setLogs( awtoLogService.findByAll() );
-        
+        response.setLogs(awtoLogService.findByAll());
+
         return response;
     }
 
@@ -98,18 +99,21 @@ public class AwtoLogController {
      * @see Get /logs Cuerpo de la petición: https://pastebin.com/HzvbZhjk
      *
      */
-    @ApiOperation(value = "logs", response = LogResponseMessage.class,
-            code = 200, notes = "Servicio REST/JSON que mapea contra la operación log del servicio SOAP de AwtoLogController.")
-    @ApiResponses(value = {
-        @ApiResponse(code = 200, message = "Listado de parametros obtenidos con éxito"),
-        @ApiResponse(code = 401, message = "Error en la autorización para consultar el recurso."),
-        @ApiResponse(code = 403, message = "Acceso no permitido para consultar el recurso"),
-        @ApiResponse(code = 404, message = "Recurso no encontrado")})
-    @GetMapping(value = "/{hashtag}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    @ResponseBody
-    public LogsResponseMessage hashtagGet(@RequestBody final String request, HttpServletResponse res) throws Exception {
+//    @ApiOperation(value = "logs", response = LogResponseMessage.class,
+//            code = 200, notes = "Servicio REST/JSON que mapea contra la operación log del servicio SOAP de AwtoLogController.")
+//    @ApiResponses(value = {
+//        @ApiResponse(code = 200, message = "Listado de parametros obtenidos con éxito"),
+//        @ApiResponse(code = 401, message = "Error en la autorización para consultar el recurso."),
+//        @ApiResponse(code = 403, message = "Acceso no permitido para consultar el recurso"),
+//        @ApiResponse(code = 404, message = "Recurso no encontrado")})
+//    @GetMapping(value = "/{hashtag}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping("/{hashtag}")
+//    @ResponseBody
+    public LogsResponseMessage hashtagGet(@PathVariable("hashtag") final String request) {
         LogsResponseMessage response = new LogsResponseMessage();
+        response.setLogs(awtoLogService.findByAllHashtag(request));
 
+//        res.setStatus(HttpServletResponse.SC_OK);
         return response;
     }
 
@@ -129,7 +133,7 @@ public class AwtoLogController {
         @ApiResponse(code = 404, message = "Recurso no encontrado")})
     @GetMapping(value = "/{logId}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public LogResponseMessage logsGetId(@RequestBody final Integer request, HttpServletResponse res) throws Exception {
+    public LogResponseMessage logsGetId(@RequestBody final Integer request, HttpServletResponse res) {
         LogResponseMessage response = new LogResponseMessage();
         response.setLogs(new Logs());
         return response;

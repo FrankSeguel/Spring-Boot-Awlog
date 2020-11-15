@@ -5,7 +5,6 @@
  */
 package cl.fseguel.awtolog.model.repository;
 
-import cl.fseguel.awtolog.model.entity.AwlogHashtag;
 import cl.fseguel.awtolog.model.entity.AwlogLogger;
 import cl.fseguel.awtolog.model.util.Constantes;
 import java.util.List;
@@ -42,10 +41,29 @@ public class AwtoLogRepository {
     public List<AwlogLogger> findByAll() {
         EntityManager em = factory.createEntityManager();
         em.getTransaction().begin();
-        Query q = em.createQuery("SELECT a FROM AwlogLogger a ORDER BY a.creationDate ASC ");
+        Query q = em.createQuery("SELECT a FROM AwlogLogger a ORDER BY a.creationDate DESC ");
+        List<AwlogLogger> AwlogHashtag = q.getResultList();
+        em.close();
+        return AwlogHashtag;
+    }
+
+    public List<AwlogLogger> findByAllHashtag(String hashtag) {
+        EntityManager em = factory.createEntityManager();
+        em.getTransaction().begin();
+        Query q = em.createQuery(" SELECT a FROM AwlogLogger a inner join a.awlogLoggerHashtagList us WHERE us.hastagId.description = :hashtag ");
+        q.setParameter("hashtag", hashtag);
         List<AwlogLogger> AwlogHashtag = q.getResultList();
         em.close();
         return AwlogHashtag;
     }
 
 }
+/*
+SELECT 
+lg
+FROM awlog_logger lg 
+inner join awlog_logger_hashtag lh on (lh.log_id = lg.id) 
+inner join awlog_hashtag ah on (ah.id = lh.hastag_id)
+where ah.description = 'hola'
+order by lg.creation_date DESC
+*/

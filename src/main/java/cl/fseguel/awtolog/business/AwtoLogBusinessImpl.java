@@ -107,9 +107,27 @@ public class AwtoLogBusinessImpl implements AwtoLogBusiness {
         lista.stream().map(log -> {
             Logs dto = new Logs();
             BeanUtils.copyProperties(log, dto);
-            dto.setId( log.getId().intValue() );
-            for(AwlogLoggerHashtag ht :log.getAwlogLoggerHashtagList()){
-                dto.getHashtags().add( ht.getHastagId().getDescription() );
+            dto.setId(log.getId().intValue());
+            for (AwlogLoggerHashtag ht : log.getAwlogLoggerHashtagList()) {
+                dto.getHashtags().add(ht.getHastagId().getDescription());
+            }
+            return dto;
+        }).forEachOrdered(dto -> {
+            lst.add(dto);
+        });
+        return lst;
+    }
+
+    @Override
+    public List<Logs> findByAllHashtag(String hashtag) {
+        List<AwlogLogger> lista = awtoLogRepository.findByAllHashtag(hashtag);
+        List<Logs> lst = new ArrayList<>();
+        lista.stream().map(log -> {
+            Logs dto = new Logs();
+            BeanUtils.copyProperties(log, dto);
+            dto.setId(log.getId().intValue());
+            for (AwlogLoggerHashtag ht : log.getAwlogLoggerHashtagList()) {
+                dto.getHashtags().add(ht.getHastagId().getDescription());
             }
             return dto;
         }).forEachOrdered(dto -> {

@@ -22,4 +22,6 @@ public interface AwtoLogService {
     
     public List<Logs> findByAll();
     
+    public List<Logs> findByAllHashtag(String hashtag);
+    
 }

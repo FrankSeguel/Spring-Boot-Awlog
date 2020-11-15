@@ -54,7 +54,7 @@ public class HastagsLogController {
         @ApiResponse(code = 404, message = "Recurso no encontrado")})
     @PutMapping(value = "/{hastags}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public void hastags(@RequestBody final HastagsRequestMessage request, HttpServletResponse res) throws Exception {
+    public void hastags(@RequestBody final HastagsRequestMessage request, HttpServletResponse res) {
         String response = awtoLogService.saveHashtags(request);
         if (Constantes.BAD_REQUEST.equals(response)) {
             res.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);

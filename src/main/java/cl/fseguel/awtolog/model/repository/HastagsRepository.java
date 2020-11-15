@@ -61,7 +61,7 @@ public class HastagsRepository {
     public List<AwlogHashtag> findById(Integer id) {
         EntityManager em = factory.createEntityManager();
         em.getTransaction().begin();
-        Query q = em.createQuery("SELECT a FROM AwlogHashtag a WHERE a.id = :id ORDER BY a.description ASC ");
+        Query q = em.createQuery("SELECT a FROM AwlogHashtag a WHERE a.id = :id ORDER BY a.description DESC ");
         q.setParameter("id", id);
         List<AwlogHashtag> awlogHashtagList = q.getResultList();
         em.close();
@@ -71,7 +71,7 @@ public class HastagsRepository {
     public List<AwlogHashtag> findByDescription(String descripcion) {
         EntityManager em = factory.createEntityManager();
         em.getTransaction().begin();
-        Query q = em.createQuery("SELECT a FROM AwlogHashtag a WHERE a.description = :description ORDER BY a.description ASC ");
+        Query q = em.createQuery("SELECT a FROM AwlogHashtag a WHERE a.description = :description ORDER BY a.description DESC ");
         q.setParameter("description", descripcion);
         List<AwlogHashtag> awlogHashtagList = q.getResultList();
         em.close();
@@ -81,7 +81,7 @@ public class HastagsRepository {
     public List<AwlogHashtag> findByAll() {
         EntityManager em = factory.createEntityManager();
         em.getTransaction().begin();
-        Query q = em.createQuery("SELECT a FROM AwlogHashtag a ORDER BY a.description ASC ");
+        Query q = em.createQuery("SELECT a FROM AwlogHashtag a ORDER BY a.description DESC ");
         List<AwlogHashtag> awlogHashtagList = q.getResultList();
         em.close();
         return awlogHashtagList;
