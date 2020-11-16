@@ -1,16 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
-  <persistence-unit name="awlog" transaction-type="RESOURCE_LOCAL">
+  <!--  <persistence-unit name="awlog" transaction-type="RESOURCE_LOCAL">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
-    <class>cl.fseguel.awlog.models.AwlogHashtag</class>
-    <class>cl.fseguel.awlog.models.AwlogLoggerHashtag</class>
-    <class>cl.fseguel.awlog.models.AwlogLogger</class>
+    <class>cl.fseguel.awtolog.model.entity.AwlogHashtag</class>
+    <class>cl.fseguel.awtolog.model.entity.AwlogLogger</class>
+    <class>cl.fseguel.awtolog.model.entity.AwlogLoggerHashtag</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://192.168.0.107:5432/awlog"/>
-      <property name="javax.persistence.jdbc.user" value="postgres"/>
+      <property name="javax.persistence.jdbc.user" value="ownerawlog"/>
       <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver"/>
-      <property name="javax.persistence.jdbc.password" value="fseguel220"/>
+      <property name="javax.persistence.jdbc.password" value="ownerawlog"/>
+    </properties>
+  </persistence-unit>-->
+  <persistence-unit name="awlog" transaction-type="RESOURCE_LOCAL">
+    <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+    <class>cl.fseguel.awtolog.model.entity.AwlogHashtag</class>
+    <class>cl.fseguel.awtolog.model.entity.AwlogLogger</class>
+    <class>cl.fseguel.awtolog.model.entity.AwlogLoggerHashtag</class>
+    <validation-mode>NONE</validation-mode>
+    <properties>
+      <property name="javax.persistence.jdbc.url" value="jdbc:mysql://192.168.0.107:3306/mySchema?zeroDateTimeBehavior=CONVERT_TO_NULL"/>
+      <property name="javax.persistence.jdbc.user" value="owner"/>
+      <property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
+      <property name="javax.persistence.jdbc.password" value="owner"/>
     </properties>
   </persistence-unit>
 </persistence>
