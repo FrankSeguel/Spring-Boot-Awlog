@@ -13,6 +13,9 @@
         </goals>
         <properties>
             <skipTests>true</skipTests>
+            <sonar.projectKey>awto-log</sonar.projectKey>
+            <sonar.host.url>http://192.168.0.103:9003</sonar.host.url>
+            <sonar.login>9f227903447990f9ca7aa8102b36a913a42b49da</sonar.login>
         </properties>
     </action>
     <action>
